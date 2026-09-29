@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PLEASE CALM DOWN!!!</title>
+	<link rel="icon" href="huge.png">
+
+	<style>
+		body{
+			margin: 0;
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+		}
+
+		#myMonitor{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 6vw;
+			margin: 0;
+			white-space: nowrap;
+		}
+
+		#mySlider{
+			position: absolute;
+			left: 50%;
+			top: calc(50% + 200px);
+			transform: translateX(-50%);
+			width: 300px;
+			accent-color: magenta;
+		}
+
+		#textBox{
+			position: absolute;
+			left: 50%;
+			top: calc(50% + 250px);
+			transform: translateX(-50%);
+			display: flex;
+			gap: 5px;
+		}
+
+		#tako{
+			position: absolute;
+			width: 200px;
+			left: 50%;
+			top: calc(50% - 00px);
+			transform: translate(-50%, -50%);
+			opacity: 0;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1 id="myMonitor">PLEASE CALM DOWN</h1>
+
+	<input type="range" id="mySlider" min="2" max="10" value="6" step="any">
+
+	<div id="textBox">
+		<input type="text" id="myText">
+		<button id="myOkay">확인</button>
+	</div>
+
+	<audio src="music.mp3" id="myMusic" loop></audio>
+	<img src="tako.gif" id="tako">
+
+	<script>
+
+	alert("음악 로딩중...7초만 기다려주세요ㅠㅠ");
+
+	myOkay.onclick = function(){
+		myMonitor.innerHTML = myText.value;
+	}
+
+	myText.oninput = function(){
+		myMonitor.innerHTML = myText.value;
+	}
+
+	mySlider.oninput = function(){
+		myMonitor.style.fontSize = mySlider.value + "vw";
+
+		tako.style.opacity = (mySlider.value - 2) / 8;
+
+		myMusic.volume = (mySlider.value - 2) / 8 * 0.35;
+
+		var hue = (mySlider.value - 2) / 8 * 360;
+		var backHue = 300 - (mySlider.value - 2) / 8 * 300;
+
+		if(mySlider.value == 2){
+			myMonitor.style.color = "black";
+			document.body.style.background = "white";
+		}else{
+			myMonitor.style.color = "hsl(" + hue + ", 100%, 50%)";
+			document.body.style.background = "hsl(" + backHue + ", 100%, 90%)";
+		}
+
+		myMusic.play();
+	}
+
+	myMusic.volume = 0.17;
+
+	</script>
+
+</body>
+
+</html>
